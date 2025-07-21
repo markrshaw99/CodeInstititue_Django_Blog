@@ -25,7 +25,10 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-insecure-CHANGE_THIS_TO_A_RANDOM_SECRET_KEY_FOR_PRODUCTION"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -106,7 +109,7 @@ WSGI_APPLICATION = 'codestar.wsgi.application'
 
 DATABASE_URL = os.environ.get(
     "DATABASE_URL",
-    "postgresql://neondb_owner:npg_smR8vqeiEz5n@ep-dawn-tree-a2dtabsc.eu-central-1.aws.neon.tech/yield_depth_clip_328247"
+    f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"
 )
 if isinstance(DATABASE_URL, bytes):
     DATABASE_URL = DATABASE_URL.decode()
